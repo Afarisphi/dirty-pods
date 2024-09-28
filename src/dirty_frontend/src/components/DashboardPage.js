@@ -2,9 +2,37 @@
 
 import { html, render } from 'lit-html';
 import './styles/dashboard.css';
+import profile from './profile.png';
+import search from './search.png';
 
 export const renderDashboardPage = (navigate) => {
-    let body = html`
+  // Fungsi untuk mendapatkan waktu dan tanggal yang dinamis
+  const getTimeAndDate = () => {
+    const now = new Date();
+
+    // Mengambil waktu dalam format jam:menit AM/PM
+    const timeFormatter = new Intl.DateTimeFormat('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+    const currentTime = timeFormatter.format(now);
+
+    // Mengambil tanggal dalam format hari, bulan, tahun
+    const dateFormatter = new Intl.DateTimeFormat('en-US', {
+      weekday: 'long',
+      month: 'long',
+      year: 'numeric',
+      day: 'numeric',
+    });
+    const currentDate = dateFormatter.format(now);
+
+    return { currentTime, currentDate };
+  };
+
+  const { currentTime, currentDate } = getTimeAndDate();
+
+  let body = html`
     <div class="dashboard-container">
       <header>
         <div class="user-info">
@@ -12,18 +40,18 @@ export const renderDashboardPage = (navigate) => {
           <p class="role">Dashboard</p>
         </div>
         <div class="profile-icon">
-          <img src="profile-icon.png" alt="Profile Icon">
+          <img src="${profile}" alt="Profile Icon">
         </div>
       </header>
 
       <div class="time-container">
-        <h2>11:18 PM</h2>
-        <p>Saturday, September 2024</p>
+        <h2>${currentTime}</h2>
+        <p>${currentDate}</p>
       </div>
 
       <div class="search-container">
         <input type="text" placeholder="Start searching here...">
-        <button><img src="search-icon.png" alt="Search"></button>
+        <button><img src="${search}" alt="Search"></button>
       </div>
 
       <section class="ongoing-election">
@@ -46,10 +74,18 @@ export const renderDashboardPage = (navigate) => {
     </div>
   `;
 
-    render(body, document.getElementById('root'));
+  render(body, document.getElementById('root'));
 
-    document.getElementById('join-btn1').addEventListener('click', () => {
-        console.log('Join Vote button clicked');
-        navigate('/detailvote-page');
-    });
+  // Event Listener untuk tombol join vote
+  document.getElementById('join-btn1').addEventListener('click', () => {
+    console.log('Join Vote button clicked');
+    navigate('/detailvote-page');
+  });
+
+  // Update waktu setiap detik
+  setInterval(() => {
+    const { currentTime, currentDate } = getTimeAndDate();
+    document.querySelector('.time-container h2').textContent = currentTime;
+    document.querySelector('.time-container p').textContent = currentDate;
+  }, 1000); // Perbarui setiap 1 detik
 };

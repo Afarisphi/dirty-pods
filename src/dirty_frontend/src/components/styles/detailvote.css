@@ -142,21 +142,47 @@
     transform: scale(1);
 }
 
-.hmmbutton {
-    display: flex;
-    flex-direction: row;
-    gap: 500px;
-}
+/* detailvote.css */
 
-button[type="submit"] {
-    background-color: #4CAF50;
+/* Tombol dasar */
+button {
+    background-color: #4CAF50; /* Warna hijau */
     color: white;
+    padding: 12px 24px;
     border: none;
-    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Gaya hover untuk tombol */
+  button:hover {
+    background-color: #45a049; /* Warna hijau lebih gelap saat dihover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan */
+  }
+  
+  /* Gaya fokus untuk tombol */
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(33, 150, 243, 0.5); /* Highlight fokus */
+  }
+  
+  /* Gaya tambahan untuk tombol "View" */
+  #viewhasil {
+    background-color: #2196F3; /* Warna biru untuk tombol View */
+  }
+  
+  #viewhasil:hover {
+    background-color: #0b7dda; /* Warna biru lebih gelap saat dihover */
+  }
+  
+  /* Gaya tambahan untuk tombol "Confirm" */
+  #confirm-vote {
+    background-color: #f44336; /* Warna merah untuk tombol Confirm */
+  }
+  
+  #confirm-vote:hover {
+    background-color: #da190b; /* Warna merah lebih gelap saat dihover */
+  }
+  
